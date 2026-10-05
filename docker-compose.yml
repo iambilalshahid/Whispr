@@ -1,0 +1,13 @@
+services:
+  tauri-builder:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tauri-chat-app
+    volumes:
+      # Mount release output so built bundles appear on the host machine
+      - ./src-tauri/target:/app/src-tauri/target
+      - ./dist:/app/dist
+    environment:
+      - CI=false
+    command: bun run tauri build
